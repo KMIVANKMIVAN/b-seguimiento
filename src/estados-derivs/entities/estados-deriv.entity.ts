@@ -1,7 +1,8 @@
 // export class EstadosDeriv {}
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { Entidade } from '../../entidades/entities/entidade.entity'; // Importa la entidad del estado si es necesario
 import { ConvsInv } from "../../convs-invs/entities/convs-inv.entity";
+import { Protolizacione } from "../../protolizaciones/entities/protolizacione.entity";
 @Entity("estados_derivs")
 export class EstadosDeriv {
   @PrimaryGeneratedColumn()
@@ -16,11 +17,14 @@ export class EstadosDeriv {
   @Column({ type: 'date', nullable: false })
   fecha: string;
 
-  @ManyToOne(() => Entidade, entidade => entidade.estados) // Relación ManyToOne con la entidad Entidade
-  @JoinColumn({ name: 'id_entidad' }) // Nombre de la columna en la tabla estados_derivs que contiene la clave externa
-  entidad: Entidade; // Propiedad que representa la relación en la entidad EstadosDeriv
+  @OneToOne(() => Entidade) // Relación uno a uno con Entidade
+  @JoinColumn({ name: 'id_entidad' }) // Columna que almacena la clave externa en la tabla EstadosDeriv
+  entidade: Entidade; // Propiedad que representa la relación
 
   @ManyToOne(() => ConvsInv, estadosDeriv => estadosDeriv.convsInvs)
   @JoinColumn({ name: 'id_estados_deriv' })
   estadosDeriv: EstadosDeriv;
+
+  @OneToOne(() => Protolizacione, protolizacione => protolizacione.estadosDeriv) // Relación uno a uno con Protolizacione
+  protolizacione: Protolizacione; // Propiedad que representa la relación
 }

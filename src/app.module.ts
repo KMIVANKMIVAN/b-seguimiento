@@ -3,7 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
-
+import { ConfigModule } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 
 import { ConveniosModule } from './convenios/convenios.module';
 import { EntidadesModule } from './entidades/entidades.module';
@@ -30,12 +31,18 @@ import { Usuario } from "./usuarios/entities/usuario.entity";
 import { DerechosProp } from "./derechos-props/entities/derechos-prop.entity";
 import { Role } from "./roles/entities/role.entity";
 // import {  } from "./grupos/entities/grupo.entity";
+import { ConsultasExternasModule } from './consultas-externas/consultas-externas.module';
 
 @Module({
   controllers: [AppController],
   providers: [AppService],
   // imports: [ConveniosModule, EntidadesModule, EstadosDerivsModule, RegistrosCgeModule, ConvsInvsModule, ProtolizacionesModule, ProyectosModule, ProcesosContrasModule, UsuariosModule, DerechosPropsModule, RolesModule, GruposModule],
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+
     ConveniosModule, EntidadesModule, EstadosDerivsModule, RegistrosCgeModule, ConvsInvsModule, ProtolizacionesModule, ProyectosModule, ProcesosContrasModule, UsuariosModule, DerechosPropsModule, RolesModule, GruposModule,
     TypeOrmModule.forRoot({
       type: 'postgres', // Tipo de base de datos
@@ -46,6 +53,23 @@ import { Role } from "./roles/entities/role.entity";
       database: 'seguimiento', // Nombre de la base de datos
       entities: [Convenio, Entidade, EstadosDeriv, RegistroCGE, ConvsInv, Protolizacione, Proyecto, ProcesosContra, Usuario, DerechosProp, Role],
       synchronize: true, // Utilizar 'false' en producción
+    }),
+    ConsultasExternasModule,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        logging: true,
+        entities: [],
+        synchronize: false,
+        multipleStatements: true,
+        name: 'cuadroConnection',
+        type: 'mysql',
+        host: configService.get<string>('IPBASEDEDATOS'),
+        port: 3306,
+        username: 'root',
+        password: configService.get<string>('DATABASECUADROPASSWORD'),
+        database: configService.get<string>('DATABASECUADRO'),
+      }),
     }),
     // Incluye tus otros módulos aquí...
   ],
