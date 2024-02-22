@@ -9,7 +9,7 @@ import { Usuario } from './entities/usuario.entity';
 @Injectable()
 export class UsuariosService {
 
-  constructor(
+  /* constructor(
     @InjectRepository(Usuario)
     private readonly usuarioRepository: Repository<Usuario>
   ){}
@@ -43,6 +43,6 @@ export class UsuariosService {
 
   remove(id: number) {
     return `This action removes a #${id} usuario`;
-  }
+  } */
 }
 
