@@ -1,5 +1,5 @@
 // export class Entidade {}
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from 'typeorm';
 import { EstadosDeriv } from '../../estados-derivs/entities/estados-deriv.entity';
 import { Convenio } from "../../convenios/entities/convenio.entity";
 
@@ -14,8 +14,8 @@ export class Entidade {
   @Column({ type: 'varchar', nullable: false, length: 254 })
   tipo_entidad: string;
 
-  @OneToMany(() => EstadosDeriv, estados => estados.entidad)
-  estados: EstadosDeriv[];
+  @OneToOne(() => EstadosDeriv, estadosDeriv => estadosDeriv.entidade) // Relación uno a uno con EstadosDeriv
+  estadosDeriv: EstadosDeriv; // Propiedad que representa la relación
 
   @OneToMany(() => Convenio, convenio => convenio.entidad)
   convenios: Convenio[];

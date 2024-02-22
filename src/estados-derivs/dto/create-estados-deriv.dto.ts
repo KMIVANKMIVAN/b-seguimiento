@@ -23,4 +23,5 @@ export class CreateEstadosDerivDto {
   @IsInt()
   @IsOptional()
   id_entidad: number;
+  
 }

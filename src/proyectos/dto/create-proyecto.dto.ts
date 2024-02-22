@@ -13,7 +13,7 @@ export class CreateProyectoDto {
   gestion: string;
 
   @IsDate()
-  @IsNotEmpty()
+  @IsOptional()
   fecha_aprobacion: string;
 
   @IsInt()

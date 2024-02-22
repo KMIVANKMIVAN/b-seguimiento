@@ -1,5 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Role } from '../../roles/entities/role.entity';
+import { Proyecto } from "../../proyectos/entities/proyecto.entity";
+
 @Entity("usuarios")
 export class Usuario {
   @PrimaryGeneratedColumn()
@@ -26,5 +28,8 @@ export class Usuario {
   @ManyToMany(() => Role, role => role.usuarios, { cascade: true })
   @JoinTable()
   roles: Role[];
+
+  @OneToMany(() => Proyecto, proyecto => proyecto.responsable) // Relación OneToMany con Proyecto
+  proyectos: Proyecto[]; // Propiedad que representa la relación con Proyecto
 
 }

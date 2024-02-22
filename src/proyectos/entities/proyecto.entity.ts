@@ -3,8 +3,9 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMan
 import { ProcesosContra } from '../../procesos-contras/entities/procesos-contra.entity';
 import { Convenio } from "../../convenios/entities/convenio.entity";
 import { DerechosProp } from "../../derechos-props/entities/derechos-prop.entity";
+import { Usuario } from "../../usuarios/entities/usuario.entity";
 
-@Entity("proceso_contra")
+@Entity("proyectos")
 export class Proyecto {
   @PrimaryGeneratedColumn()
   id: number;
@@ -15,7 +16,7 @@ export class Proyecto {
   @Column({ type: 'varchar', nullable: false, length: 10 })
   gestion: string;
 
-  @Column({ type: 'date', nullable: false })
+  @Column({ type: 'date', nullable: true })
   fecha_aprobacion: string;
 
   @Column({ type: 'int', nullable: false })
@@ -30,7 +31,7 @@ export class Proyecto {
   @OneToMany(() => DerechosProp, derechosProp => derechosProp.proyecto)
   derechosProps: DerechosProp[];
 
-  /* @ManyToOne(() => ,  => .)
-  @JoinColumn({ name: 'id_proyecto' })
-  : ; */
+  @ManyToOne(() => Usuario, usuario => usuario.proyectos) // Relación ManyToOne con Usuario
+  @JoinColumn({ name: 'id_responsable' }) // Columna que contiene la clave externa
+  responsable: Usuario; // Propiedad que representa la relación con Usuario
 }

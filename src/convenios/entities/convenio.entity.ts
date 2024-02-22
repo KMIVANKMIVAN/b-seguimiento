@@ -11,6 +11,10 @@ export class Convenio {
   @Column({ type: 'varchar', nullable: false, length: 20 })
   tipo: string;
 
+  @Column({ type: 'date', nullable: false })
+  fecha_suscripcion: string;
+
+
   @ManyToOne(() => Proyecto, proyecto => proyecto.procesosContra)
   @JoinColumn({ name: 'id_proyecto' })
   proyecto: Proyecto;
