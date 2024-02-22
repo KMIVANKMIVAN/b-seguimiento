@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString, MaxLength,MinLength, IsBoolean} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MaxLength,MinLength, IsBoolean, IsNumber} from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsString()
@@ -16,6 +16,15 @@ export class CreateUsuarioDto {
   @MaxLength(50,{message:'La longitud maxima es de 50 caracteres'})
   apellidos: string;
 
+  @IsNumber()
+  @IsNotEmpty()
+  ci: number;
+
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(2,{message:'La longitud maxima es de 2 caracteres'})
+  complemento: string;
+
   @IsEmail()
   @IsNotEmpty()
   correo: string;
@@ -24,7 +33,7 @@ export class CreateUsuarioDto {
   @IsNotEmpty()
   @MaxLength(20,{message:'La longitud maxima es de 50 caracteres'})
   @MinLength(8,{message:'Longitud minima 8 caracteres'})
-  contraseña: string;
+  contrasenia: string;
 
   @IsString()
   @IsBoolean()

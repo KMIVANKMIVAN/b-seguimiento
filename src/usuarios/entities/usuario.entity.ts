@@ -13,12 +13,18 @@ export class Usuario {
 
   @Column({ type: 'varchar', length: 50 })
   apellidos: string;
+  
+  @Column({ type: 'int'})
+  ci: number;
+
+  @Column({ type: 'varchar', length:2 })
+  complemento: string;
 
   @Column({ type: 'varchar' })
   correo: string;
 
   @Column({ type: 'varchar', length: 50 })
-  contraseña: string;
+  contrasenia: string;
 
   @Column({ type: 'boolean', default: true })
   es_activo: boolean;
