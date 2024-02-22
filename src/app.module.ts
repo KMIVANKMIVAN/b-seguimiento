@@ -10,7 +10,6 @@ import { ProtolizacionesModule } from './protolizaciones/protolizaciones.module'
 import { ProyectosModule } from './proyectos/proyectos.module';
 import { ProcesosContrasModule } from './procesos-contras/procesos-contras.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
-import { UsuariosRolesModule } from './usuarios-roles/usuarios-roles.module';
 import { DerechosPropsModule } from './derechos-props/derechos-props.module';
 import { RolesModule } from './roles/roles.module';
 import { GruposModule } from './grupos/grupos.module';
@@ -18,6 +17,6 @@ import { GruposModule } from './grupos/grupos.module';
 @Module({
   controllers: [AppController],
   providers: [AppService],
-  imports: [ConveniosModule, EntidadesModule, EstadosDerivsModule, RegistrosCgeModule, ConvsInvsModule, ProtolizacionesModule, ProyectosModule, ProcesosContrasModule, UsuariosModule, UsuariosRolesModule, DerechosPropsModule, RolesModule, GruposModule],
+  imports: [ConveniosModule, EntidadesModule, EstadosDerivsModule, RegistrosCgeModule, ConvsInvsModule, ProtolizacionesModule, ProyectosModule, ProcesosContrasModule, UsuariosModule, DerechosPropsModule, RolesModule, GruposModule],
 })
 export class AppModule { }
