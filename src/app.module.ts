@@ -32,6 +32,7 @@ import { DerechosProp } from "./derechos-props/entities/derechos-prop.entity";
 import { Role } from "./roles/entities/role.entity";
 // import {  } from "./grupos/entities/grupo.entity";
 import { ConsultasExternasModule } from './consultas-externas/consultas-externas.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   controllers: [AppController],
@@ -71,6 +72,7 @@ import { ConsultasExternasModule } from './consultas-externas/consultas-externas
         database: configService.get<string>('DATABASECUADRO'),
       }),
     }),
+    AuthModule,
     // Incluye tus otros módulos aquí...
   ],
 })

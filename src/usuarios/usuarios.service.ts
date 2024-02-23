@@ -80,6 +80,9 @@ export class UsuariosService {
     }
     return user;
   }
+  async findOneByUserName(nombre_usuario: string): Promise<Usuario> {
+    return this.usuarioRepository.findOne({where:{nombre_usuario}})
+  }
 
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {
     const user = await this.findOne(id);
