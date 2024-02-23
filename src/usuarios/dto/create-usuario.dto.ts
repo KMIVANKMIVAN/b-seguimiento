@@ -1,19 +1,19 @@
-import { IsEmail, IsNotEmpty, IsString, MaxLength,MinLength, IsBoolean, IsNumber} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength, IsBoolean, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsString()
   @IsNotEmpty()
-  @MaxLength(50,{message:'La longitud maxima es de 50 caracteres'})
+  @MaxLength(50, { message: 'La longitud maxima es de 50 caracteres' })
   nombre_usuario: string;
 
   @IsString()
   @IsNotEmpty()
-  @MaxLength(50,{message:'La longitud maxima es de 50 caracteres'})
+  @MaxLength(50, { message: 'La longitud maxima es de 50 caracteres' })
   nombres: string;
 
   @IsString()
   @IsNotEmpty()
-  @MaxLength(50,{message:'La longitud maxima es de 50 caracteres'})
+  @MaxLength(50, { message: 'La longitud maxima es de 50 caracteres' })
   apellidos: string;
 
   @IsNumber()
@@ -21,8 +21,8 @@ export class CreateUsuarioDto {
   ci: number;
 
   @IsString()
-  @IsNotEmpty()
-  @MaxLength(2,{message:'La longitud maxima es de 2 caracteres'})
+  @IsOptional()
+  @MaxLength(10, { message: 'La longitud maxima es de 2 caracteres' })
   complemento: string;
 
   @IsEmail()
@@ -31,8 +31,8 @@ export class CreateUsuarioDto {
 
   @IsString()
   @IsNotEmpty()
-  @MaxLength(20,{message:'La longitud maxima es de 50 caracteres'})
-  @MinLength(8,{message:'Longitud minima 8 caracteres'})
+  @MaxLength(70, { message: 'La longitud maxima es de 50 caracteres' })
+  @MinLength(8, { message: 'Longitud minima 8 caracteres' })
   contrasenia: string;
 
   @IsString()

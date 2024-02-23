@@ -10,7 +10,7 @@ export class UsuariosController {
   @Post()
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuariosService.create(createUsuarioDto);
-  } 
+  }
 
   @Get()
   findAll() {
@@ -25,5 +25,10 @@ export class UsuariosController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuariosService.update(+id, updateUsuarioDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.usuariosService.remove(+id);
   }
 }

@@ -15,17 +15,17 @@ export class Usuario {
 
   @Column({ type: 'varchar', length: 50 })
   apellidos: string;
-  
-  @Column({ type: 'int'})
+
+  @Column({ type: 'int' })
   ci: number;
 
-  @Column({ type: 'varchar', length:2 })
+  @Column({ type: 'varchar', nullable: true, length: 10 })
   complemento: string;
 
   @Column({ type: 'varchar' })
   correo: string;
 
-  @Column({ type: 'varchar', length: 50 })
+  @Column({ type: 'varchar', length: 70 })
   contrasenia: string;
 
   @Column({ type: 'boolean', default: true })
