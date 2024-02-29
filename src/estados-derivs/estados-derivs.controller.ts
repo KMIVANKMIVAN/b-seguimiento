@@ -3,9 +3,9 @@ import { EstadosDerivsService } from './estados-derivs.service';
 import { CreateEstadosDerivDto } from './dto/create-estados-deriv.dto';
 import { UpdateEstadosDerivDto } from './dto/update-estados-deriv.dto';
 
-@Controller('estados-derivs')
+@Controller('estadosderivs')
 export class EstadosDerivsController {
-  constructor(private readonly estadosDerivsService: EstadosDerivsService) {}
+  constructor(private readonly estadosDerivsService: EstadosDerivsService) { }
 
   @Post()
   create(@Body() createEstadosDerivDto: CreateEstadosDerivDto) {
@@ -18,17 +18,17 @@ export class EstadosDerivsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.estadosDerivsService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEstadosDerivDto: UpdateEstadosDerivDto) {
+  update(@Param('id') id: number, @Body() updateEstadosDerivDto: UpdateEstadosDerivDto) {
     return this.estadosDerivsService.update(+id, updateEstadosDerivDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.estadosDerivsService.remove(+id);
   }
 }

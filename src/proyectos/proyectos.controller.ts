@@ -7,28 +7,28 @@ import { UpdateProyectoDto } from './dto/update-proyecto.dto';
 export class ProyectosController {
   constructor(private readonly proyectosService: ProyectosService) { }
 
-  /*  @Post()
+   @Post()
    create(@Body() createProyectoDto: CreateProyectoDto) {
      return this.proyectosService.create(createProyectoDto);
    }
-  */
+ 
   @Get()
   findAll() {
     return this.proyectosService.findAll();
   }
 
-  /* @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(':id')
+  findOne(@Param('id') id: number) {
     return this.proyectosService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProyectoDto: UpdateProyectoDto) {
+  update(@Param('id') id: number, @Body() updateProyectoDto: UpdateProyectoDto) {
     return this.proyectosService.update(+id, updateProyectoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.proyectosService.remove(+id);
-  } */
+  }
 }

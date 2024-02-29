@@ -4,7 +4,7 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiKeyGuard } from '../auth/guards/api-key.guard';
 
-@UseGuards(ApiKeyGuard)
+// @UseGuards(ApiKeyGuard)
 @Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) { }
@@ -22,6 +22,11 @@ export class UsuariosController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usuariosService.findOne(+id);
+  }
+
+  @Get('buscar/:nomci')
+  findOneNomCi(@Param('nomci') nomci: string) {
+    return this.usuariosService.findOneNomCi(nomci);
   }
 
   @Patch(':id')

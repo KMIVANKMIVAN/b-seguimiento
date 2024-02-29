@@ -3,7 +3,7 @@ import { ProcesosContrasService } from './procesos-contras.service';
 import { CreateProcesosContraDto } from './dto/create-procesos-contra.dto';
 import { UpdateProcesosContraDto } from './dto/update-procesos-contra.dto';
 
-@Controller('procesos-contras')
+@Controller('procesoscontras')
 export class ProcesosContrasController {
   constructor(private readonly procesosContrasService: ProcesosContrasService) {}
 

@@ -18,17 +18,17 @@ export class EntidadesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.entidadesService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEntidadeDto: UpdateEntidadeDto) {
+  update(@Param('id') id: number, @Body() updateEntidadeDto: UpdateEntidadeDto) {
     return this.entidadesService.update(+id, updateEntidadeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.entidadesService.remove(+id);
   }
 }

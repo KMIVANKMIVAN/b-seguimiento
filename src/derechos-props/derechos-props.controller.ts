@@ -3,7 +3,7 @@ import { DerechosPropsService } from './derechos-props.service';
 import { CreateDerechosPropDto } from './dto/create-derechos-prop.dto';
 import { UpdateDerechosPropDto } from './dto/update-derechos-prop.dto';
 
-@Controller('derechos-props')
+@Controller('derechosprops')
 export class DerechosPropsController {
   constructor(private readonly derechosPropsService: DerechosPropsService) {}
 
