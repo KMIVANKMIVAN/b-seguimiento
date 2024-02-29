@@ -80,8 +80,24 @@ export class UsuariosService {
     }
     return user;
   }
+
+  async findOneNomCi(nomci: string): Promise<Usuario[] | undefined> {
+    const users = await this.usuarioRepository.createQueryBuilder('usuarios')
+      .where('usuarios.nombre_usuario ILIKE :nomci', { nomci: `%${nomci}%` })
+      .orWhere('CAST(usuarios.ci AS TEXT) LIKE :nomci', { nomci: `%${nomci}%` }) // Convierte `ci` a texto
+      .take(5)
+      .getMany();
+    if (!users) {
+      throw new NotFoundException({
+        error: `El Usuario con dato ${nomci} NO Existe`,
+        message: `Usuario con dato ${nomci} no fue encontrado`,
+      });
+    }
+    return users;
+  }
+
   async findOneByUserName(nombre_usuario: string): Promise<Usuario> {
-    return this.usuarioRepository.findOne({where:{nombre_usuario}})
+    return this.usuarioRepository.findOne({ where: { nombre_usuario } })
   }
 
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {

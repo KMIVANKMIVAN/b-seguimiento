@@ -3,7 +3,7 @@ import { RegistrosCgeService } from './registros-cge.service';
 import { CreateRegistrosCgeDto } from './dto/create-registros-cge.dto';
 import { UpdateRegistrosCgeDto } from './dto/update-registros-cge.dto';
 
-@Controller('registros-cge')
+@Controller('registroscge')
 export class RegistrosCgeController {
   constructor(private readonly registrosCgeService: RegistrosCgeService) {}
 
@@ -18,17 +18,17 @@ export class RegistrosCgeController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.registrosCgeService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRegistrosCgeDto: UpdateRegistrosCgeDto) {
+  update(@Param('id') id: number, @Body() updateRegistrosCgeDto: UpdateRegistrosCgeDto) {
     return this.registrosCgeService.update(+id, updateRegistrosCgeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.registrosCgeService.remove(+id);
   }
 }

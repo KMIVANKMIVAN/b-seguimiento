@@ -8,11 +8,12 @@ import { JwtService } from '@nestjs/jwt'
 export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     constructor(
         private authService: AuthService,
-        ) {
+    ) {
         super()
     }
 
     async validate(nombre_usuario: string, contrasenia: string) {
+        console.log(":XCg");
         const token = this.authService.signIn(nombre_usuario, contrasenia);
         return token
     }

@@ -3,9 +3,9 @@ import { ConvsInvsService } from './convs-invs.service';
 import { CreateConvsInvDto } from './dto/create-convs-inv.dto';
 import { UpdateConvsInvDto } from './dto/update-convs-inv.dto';
 
-@Controller('convs-invs')
+@Controller('convsinvs')
 export class ConvsInvsController {
-  constructor(private readonly convsInvsService: ConvsInvsService) {}
+  constructor(private readonly convsInvsService: ConvsInvsService) { }
 
   @Post()
   create(@Body() createConvsInvDto: CreateConvsInvDto) {
