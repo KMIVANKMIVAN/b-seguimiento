@@ -5,16 +5,22 @@ import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
+export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(
         private authService: AuthService,
-        ) {
-        super()
+    ) {
+        super({
+            usernameField: 'nombre_usuario', 
+            passwordField: 'contrasenia', 
+        });
     }
-
     async validate(nombre_usuario: string, contrasenia: string) {
-        const token = this.authService.signIn(nombre_usuario, contrasenia);
-        return token
+        console.log("sdf")
+        const user = await this.authService.validateUser(nombre_usuario, contrasenia);
+        if (!user) {
+            throw new UnauthorizedException("usuario no autorizado");
+        }
+        return user
     }
 
 }
