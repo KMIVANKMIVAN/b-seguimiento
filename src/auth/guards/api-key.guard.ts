@@ -13,24 +13,24 @@ export class ApiKeyGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest<Request>();
     const token = this.extractTokenFromHeader(request);
-  
-  if (!token) {
-    throw new UnauthorizedException("dfas");
+
+    if (!token) {
+      throw new UnauthorizedException();
+    }
+    try {
+      const payload = this.jwtService.verifyAsync(
+        token,
+        {
+          secret: 'key'
+        }
+      );
+
+      request['user'] = payload;
+    } catch {
+      throw new UnauthorizedException();
+    }
+    return true;
   }
-  try {
-    const payload = this.jwtService.verifyAsync(
-      token,
-      {
-        secret: 'key'
-      }
-    );
-    
-    request['user'] = payload;
-  } catch {
-    throw new UnauthorizedException();
-  }
-  return true;
-}
 
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
