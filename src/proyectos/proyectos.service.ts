@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateProyectoDto } from './dto/create-proyecto.dto';
 import { UpdateProyectoDto } from './dto/update-proyecto.dto';
 import { Proyecto } from './entities/proyecto.entity';
+import { apiObtainProyectos } from '../consultas-externas/obtener-proyecto.api';
 
 @Injectable()
 export class ProyectosService {
@@ -52,6 +53,25 @@ export class ProyectosService {
         });
       }
     }
+  }
+  async findByKeyword(keyword: string): Promise<Proyecto[] | undefined> {
+    const proyectos = await this.proyectoRepository.createQueryBuilder('proyectos')
+      .where('proyectos.nombre ILIKE :keyword', { keyword: `%${keyword}%` })
+      .orWhere('CAST(proyectos.gestion AS TEXT) LIKE :keyword', { keyword: `%${keyword}%` }) 
+      .orWhere('proyectos.codigo ILIKE :keyword', { keyword: `%${keyword}%` }) 
+      .take(5)
+      .getMany();
+    if (!proyectos) {
+      throw new NotFoundException({
+        error: `El Proyecto con dato ${keyword} NO Existe`,
+        message: `Proyecto con dato ${keyword} no fue encontrado`,
+      });
+    }
+    return proyectos;
+  }
+  async obtainProyecto(codigo: string): Promise<Proyecto[] | undefined> {
+    const proy = apiObtainProyectos(codigo);
+    return proy;
   }
 
 

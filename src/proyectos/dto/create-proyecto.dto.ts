@@ -4,19 +4,24 @@ import { IsString, IsInt, IsNotEmpty, MaxLength, IsDate, IsOptional } from 'clas
 export class CreateProyectoDto {
   @IsString()
   @IsNotEmpty()
-  @MaxLength(500, { message: "La longitud máxima es de 500 caracteres" })
-  nombre: string;
+  @MaxLength(50, { message: "La longitud máxima es de 500 caracteres" })
+  codigo: string;
 
   @IsString()
   @IsNotEmpty()
+  @MaxLength(500, { message: "La longitud máxima es de 500 caracteres" })
+  nombre: string;
+
+  @IsInt()
+  @IsNotEmpty()
   @MaxLength(10, { message: "La longitud máxima es de 10 caracteres" })
-  gestion: string;
+  gestion: number;
 
   @IsDate()
   @IsOptional()
   fecha_aprobacion: string;
 
   @IsInt()
-  @IsNotEmpty()
+  @IsOptional()
   id_responsable: number;
 }

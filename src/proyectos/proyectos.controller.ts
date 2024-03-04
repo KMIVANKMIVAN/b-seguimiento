@@ -21,7 +21,11 @@ export class ProyectosController {
   findOne(@Param('id') id: number) {
     return this.proyectosService.findOne(+id);
   }
-
+  @Get('buscar/:codigo')
+  findByKeyword(@Param('codigo') codigo: string) {
+    return this.proyectosService.findByKeyword(codigo);
+  }
+  
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateProyectoDto: UpdateProyectoDto) {
     return this.proyectosService.update(+id, updateProyectoDto);
